@@ -1,3 +1,22 @@
+# decoder-only transformer (just generates text) following 2017 attention is all you need
+# encoder-decoder would be language tranlsation for example 
+#   Encoder: same as decoded but for French embedded tokens. No mask so they can all talkt to each other to generate sentiment
+#   encoding content of this french sentence
+#   that's connected to the decoder via cross-attention. Keys and valeus coming from the side (top of encoder)
+#   
+# How does this relate to ChatGPT?
+# 2 stages: pre-training, then fine tuning
+# pre-training: what we've done on large chunk fo internet. It then babbles on with random internet autocomplete
+# we have 10mio params, dataset is 1mio chars (tokens). OpenAI has 50k vocab, 175bio params, 96 layers, 3.2m batch size lol
+# trained on 300bio tokens (ours was 1mio). 1trio today's standards
+# this gives a document completer
+# 
+# fine tuning is aligning it to be an assistant
+# collect training data which are how the want the assistant to respond
+# this is jsut thousands of focuments with examples
+# then reward model that we all help with where users rank responses
+# with this reward model they fine tune the sampling policy so taht the answers are generated to perform better in user reviews
+
 import torch
 import torch.nn as nn
 from torch.nn import functional as F
